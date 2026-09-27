@@ -1,0 +1,192 @@
+/* ── CATALOGUE PAGE ── */
+.catalogue-page { min-height: 100vh; }
+
+/* ── Page Hero ── */
+.page-hero {
+  padding-top: calc(72px + 80px);
+  padding-bottom: 80px;
+  background: var(--color-black);
+  text-align: center;
+}
+
+.catalogue-page.dark .page-hero { background: var(--color-dark-bg); }
+.catalogue-page.cream .page-hero { background: var(--color-cream); }
+.catalogue-page.cream .page-hero__title { color: var(--color-black); }
+.catalogue-page.cream .page-hero__sub { color: var(--color-taupe); }
+
+.page-hero__title {
+  font-family: var(--font-title);
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: var(--color-off-white);
+  margin-bottom: 20px;
+}
+
+.page-hero__sub {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: rgba(250,248,245,0.6);
+  font-style: italic;
+}
+
+/* ── Grid Section ── */
+.catalogue-grid-section {
+  padding-block: var(--section-padding);
+  background: var(--color-off-white);
+}
+
+.catalogue-page.dark .catalogue-grid-section { background: #111; }
+.catalogue-page.cream .catalogue-grid-section { background: var(--color-cream); }
+
+/* ── Cat Grid ── */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* ── Cat Card ── */
+.cat-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  cursor: pointer;
+}
+
+.catalogue-page.dark .cat-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); }
+
+.cat-card:hover { transform: translateY(-10px); box-shadow: 0 24px 60px rgba(0,0,0,0.14); }
+
+.cat-card__img-wrap {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.cat-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+
+.cat-card:hover .cat-card__img { transform: scale(1.07); }
+
+.cat-card__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--color-black);
+  color: var(--color-off-white);
+  font-family: var(--font-title);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  z-index: 2;
+}
+
+.cat-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,10,10,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.cat-card:hover .cat-card__overlay { opacity: 1; }
+
+.cat-card__cta {
+  font-family: var(--font-title);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: white;
+  border: 2px solid white;
+  padding: 12px 24px;
+}
+
+.cat-card__info {
+  padding: 22px 20px;
+}
+
+.cat-card__name {
+  font-family: var(--font-title);
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-black);
+  margin-bottom: 8px;
+}
+
+.catalogue-page.dark .cat-card__name { color: var(--color-off-white); }
+
+.cat-card__desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-taupe);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.cat-card__link {
+  font-family: var(--font-title);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-blush);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── CTA Section ── */
+.cat-cta-section {
+  padding-block: 80px;
+  background: var(--color-bordeaux);
+}
+
+.cat-cta {
+  text-align: center;
+}
+
+.cat-cta__title {
+  font-family: var(--font-title);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--color-off-white);
+  margin-bottom: 16px;
+}
+
+.cat-cta__sub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: rgba(250,248,245,0.7);
+  font-style: italic;
+  margin-bottom: 36px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 767px) {
+  .cat-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .page-hero { padding-top: calc(72px + 48px); padding-bottom: 48px; }
+  .cat-card__info { padding: 14px 12px; }
+  .cat-card__name { font-size: 12px; }
+  .cat-card__desc { display: none; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+}

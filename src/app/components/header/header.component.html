@@ -1,0 +1,74 @@
+<header class="header" [class.scrolled]="isScrolled()">
+  <div class="header__inner container">
+
+    <!-- ── Logo ── -->
+    <a routerLink="/" class="header__logo" (click)="closeMenu()">
+      <span class="logo-main">GLAM BEAUTY</span>
+      <span class="logo-sub">BY AK</span>
+    </a>
+
+    <!-- ── Desktop Nav ── -->
+    <nav class="header__nav" aria-label="Navigation principale">
+      <ul class="nav__list">
+        @for (link of navLinks; track link.path) {
+          <li class="nav__item">
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+              class="nav__link"
+            >{{ link.label }}</a>
+          </li>
+        }
+      </ul>
+    </nav>
+
+    <!-- ── CTA + Hamburger ── -->
+    <div class="header__actions">
+      <a href="https://wa.me/221776711897" target="_blank" class="btn-rdv btn-primary accent">
+        📲 Prendre RDV
+      </a>
+
+      <button
+        class="hamburger"
+        [class.open]="menuOpen()"
+        (click)="toggleMenu()"
+        aria-label="Ouvrir le menu"
+        id="hamburger-btn"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Mobile Menu ── -->
+  <div class="mobile-menu" [class.open]="menuOpen()" id="mobile-nav">
+    <nav aria-label="Menu mobile">
+      <ul class="mobile-nav__list">
+        @for (link of navLinks; track link.path) {
+          <li>
+            <a
+              [routerLink]="link.path"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+              class="mobile-nav__link"
+              (click)="closeMenu()"
+            >{{ link.label }}</a>
+          </li>
+        }
+        <li class="mobile-cta">
+          <a href="https://wa.me/221776711897" target="_blank" class="btn-primary accent" (click)="closeMenu()">
+            📲 Prendre RDV
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ── Overlay ── -->
+  @if (menuOpen()) {
+    <div class="overlay" (click)="closeMenu()"></div>
+  }
+</header>

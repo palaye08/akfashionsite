@@ -1,0 +1,140 @@
+@if (product) {
+  <!-- ── BREADCRUMB ── -->
+  <div class="breadcrumb-bar">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Fil d'ariane">
+        <a routerLink="/">Accueil</a>
+        <span class="bc-sep">›</span>
+        <a [routerLink]="getCategoryRoute(product.category)">{{ product.categoryLabel }}</a>
+        <span class="bc-sep">›</span>
+        <span>{{ product.name }}</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ── PRODUCT DETAIL ── -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-layout">
+
+        <!-- LEFT: Galerie -->
+        <div class="detail-gallery fade-in">
+          <div class="gallery-main">
+            <img
+              [src]="product.images ? product.images[activeImage] : product.image"
+              [alt]="product.name"
+              class="gallery-main__img"
+              fetchpriority="high"
+            />
+            @if (product.badge) {
+              <span class="gallery-badge">{{ product.badge }}</span>
+            }
+          </div>
+          @if (product.images && product.images.length > 1) {
+            <div class="gallery-thumbs">
+              @for (img of product.images; track img; let i = $index) {
+                <button
+                  class="thumb-btn"
+                  [class.active]="activeImage === i"
+                  (click)="setImage(i)"
+                  [attr.aria-label]="'Image ' + (i + 1)"
+                >
+                  <img [src]="img" [alt]="product.name + ' ' + (i + 1)" loading="lazy" />
+                </button>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- RIGHT: Infos -->
+        <div class="detail-info fade-in fade-in-delay-1">
+          <p class="detail-cat">{{ product.categoryLabel }}</p>
+          <h1 class="detail-title">{{ product.name }}</h1>
+
+          @if (product.badge) {
+            <div class="detail-badge">{{ product.badge }}</div>
+          }
+
+          <p class="detail-desc">{{ product.description }}</p>
+
+          <div class="detail-divider"></div>
+
+          <!-- Horaires -->
+          <div class="detail-hours">
+            <div class="hours-icon">🕐</div>
+            <div>
+              <strong>Ouvert 24h/24 — 7j/7</strong>
+              <p>Lundi au Samedi · Tous les jours</p>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="detail-actions">
+            <a
+              href="https://wa.me/221776711897?text=Bonjour%20Aïcha,%20je%20voudrais%20un%20rendez-vous%20pour%20{{ product.name }}"
+              target="_blank"
+              class="btn-primary accent btn-full"
+              id="btn-whatsapp-rdv"
+            >
+              📲 Réserver sur WhatsApp
+            </a>
+            <a
+              href="tel:+221776711897"
+              class="btn-primary btn-full"
+              id="btn-appeler"
+            >
+              📞 Appeler maintenant
+            </a>
+          </div>
+
+          <!-- Infos rapides -->
+          <div class="detail-tags">
+            <span class="tag">✅ Prise en charge professionnelle</span>
+            <span class="tag">🌿 Produits de qualité</span>
+            <span class="tag">🏆 Résultats durables</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRODUITS SIMILAIRES ── -->
+  @if (similarProducts.length > 0) {
+    <section class="similar-section">
+      <div class="container">
+        <div class="section-header fade-in">
+          <p class="section-label">Découvrir aussi</p>
+          <h2 class="section-title">{{ product.categoryLabel }} similaires</h2>
+        </div>
+        <div class="similar-grid">
+          @for (p of similarProducts; track p.id; let i = $index) {
+            <a [routerLink]="['/produit', p.id]" class="product-card fade-in" [class]="'fade-in-delay-' + (i + 1)">
+              <div class="product-card__img-wrap">
+                <img [src]="p.image" [alt]="p.name" loading="lazy" class="product-card__img" />
+                @if (p.badge) {
+                  <span class="product-card__badge">{{ p.badge }}</span>
+                }
+                <div class="product-card__hover"><span>Voir le détail →</span></div>
+              </div>
+              <div class="product-card__info">
+                <p class="product-card__cat">{{ p.categoryLabel }}</p>
+                <h3 class="product-card__name">{{ p.name }}</h3>
+                <p class="product-card__desc">{{ p.shortDesc }}</p>
+              </div>
+            </a>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+} @else {
+  <!-- Produit non trouvé -->
+  <div class="not-found">
+    <div class="container">
+      <h2>Produit introuvable</h2>
+      <p>Ce produit n'existe pas ou a été retiré du catalogue.</p>
+      <a routerLink="/" class="btn-primary">← Retour à l'accueil</a>
+    </div>
+  </div>
+}

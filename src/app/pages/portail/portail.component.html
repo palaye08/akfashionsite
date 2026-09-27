@@ -1,0 +1,222 @@
+<!-- ============================================================
+     PORTAIL — Page d'accueil Glam Beauty by AK
+     ============================================================ -->
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero__bg">
+    <img src="assets/aicha.png" alt="Aïcha Kébé — Glam Beauty by AK" class="hero__img" fetchpriority="high" />
+    <div class="hero__overlay"></div>
+  </div>
+  <div class="hero__content container">
+    <div class="hero__text">
+      <p class="hero__eyebrow section-label">Institut de Beauté • Dakar, Sénégal</p>
+      <h1 class="hero__title">
+        VOTRE<br>
+        <span class="hero__word">{{ displayWord }}</span><br>
+        COMMENCE ICI
+      </h1>
+      <p class="hero__sub">
+        Pédicure · Manucure · Extension de Cils · Ongles<br>
+        Cosmétiques Bio · Vêtements Unisexe · Sacs
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/ongles" class="btn-primary light">Découvrir nos services</a>
+        <a href="https://wa.me/221776711897" target="_blank" class="btn-primary accent">
+          📲 +221 77 671 18 97
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="hero__scroll-hint">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</section>
+
+<!-- ── STRIP ANNONCE ── -->
+<div class="strip">
+  <div class="strip__inner">
+    <span>✨ Ouvert 24h/24 — 7j/7</span>
+    <span class="sep">◆</span>
+    <span>💅 Ongles Gel Permanent</span>
+    <span class="sep">◆</span>
+    <span>🖤 Extension Cils Volume Russe</span>
+    <span class="sep">◆</span>
+    <span>🌿 Produits Bio & Naturels</span>
+    <span class="sep">◆</span>
+    <span>👗 Vêtements Toutes Tailles</span>
+    <span class="sep">◆</span>
+    <span>📲 WhatsApp : +221 77 671 18 97</span>
+  </div>
+</div>
+
+<!-- ── SECTION ONGLES ── -->
+<section class="catalogue-section" id="ongles">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">💅 Catalogue</p>
+      <h2 class="section-title">Nos Ongles</h2>
+      <p class="section-desc">Gel permanent, nail art, capsules — des ongles parfaits qui durent.</p>
+    </div>
+    <div class="products-grid">
+      @for (p of featuredOngles; track p.id; let i = $index) {
+        <a [routerLink]="['/produit', p.id]" class="product-card fade-in" [class]="'fade-in-delay-' + (i+1)">
+          <div class="product-card__img-wrap">
+            <img [src]="p.image" [alt]="p.name" loading="lazy" class="product-card__img" />
+            @if (p.badge) {
+              <span class="product-card__badge">{{ p.badge }}</span>
+            }
+            <div class="product-card__hover">
+              <span>Voir le détail →</span>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__cat">{{ p.categoryLabel }}</p>
+            <h3 class="product-card__name">{{ p.name }}</h3>
+            <p class="product-card__desc">{{ p.shortDesc }}</p>
+          </div>
+        </a>
+      }
+    </div>
+    <div class="section-cta fade-in">
+      <a routerLink="/ongles" class="btn-primary">Voir tous les ongles</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION EXTENSIONS ── -->
+<section class="catalogue-section dark-section" id="extensions">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">🖤 Catalogue</p>
+      <h2 class="section-title light">Extension de Cils</h2>
+      <p class="section-desc light">Volume russe, classique, naturel — un regard inoubliable.</p>
+    </div>
+    <div class="products-grid">
+      @for (p of featuredExtensions; track p.id; let i = $index) {
+        <a [routerLink]="['/produit', p.id]" class="product-card product-card--dark fade-in" [class]="'fade-in-delay-' + (i+1)">
+          <div class="product-card__img-wrap">
+            <img [src]="p.image" [alt]="p.name" loading="lazy" class="product-card__img" />
+            @if (p.badge) {
+              <span class="product-card__badge">{{ p.badge }}</span>
+            }
+            <div class="product-card__hover">
+              <span>Voir le détail →</span>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__cat">{{ p.categoryLabel }}</p>
+            <h3 class="product-card__name">{{ p.name }}</h3>
+            <p class="product-card__desc">{{ p.shortDesc }}</p>
+          </div>
+        </a>
+      }
+    </div>
+    <div class="section-cta fade-in">
+      <a routerLink="/extensions" class="btn-primary light">Voir toutes les extensions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION VÊTEMENTS ── -->
+<section class="catalogue-section" id="habits">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">👗 Catalogue</p>
+      <h2 class="section-title">Vêtements Unisexe</h2>
+      <p class="section-desc">Mode contemporaine — toutes tailles disponibles.</p>
+    </div>
+    <div class="products-grid products-grid--4">
+      @for (p of featuredHabits; track p.id; let i = $index) {
+        <a [routerLink]="['/produit', p.id]" class="product-card fade-in" [class]="'fade-in-delay-' + (i+1)">
+          <div class="product-card__img-wrap">
+            <img [src]="p.image" [alt]="p.name" loading="lazy" class="product-card__img" />
+            @if (p.badge) {
+              <span class="product-card__badge">{{ p.badge }}</span>
+            }
+            <div class="product-card__hover">
+              <span>Voir le détail →</span>
+            </div>
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__cat">{{ p.categoryLabel }}</p>
+            <h3 class="product-card__name">{{ p.name }}</h3>
+            <p class="product-card__desc">{{ p.shortDesc }}</p>
+          </div>
+        </a>
+      }
+    </div>
+    <div class="section-cta fade-in">
+      <a routerLink="/habits" class="btn-primary">Voir tous les vêtements</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── POURQUOI NOUS CHOISIR ── -->
+<section class="strengths-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Notre Engagement</p>
+      <h2 class="section-title">Pourquoi Nous Choisir ?</h2>
+    </div>
+    <div class="strengths-grid">
+      @for (s of strengths; track s.title; let i = $index) {
+        <div class="strength-card fade-in" [class]="'fade-in-delay-' + (i+1)">
+          <div class="strength-card__icon">{{ s.icon }}</div>
+          <h3 class="strength-card__title">{{ s.title }}</h3>
+          <p class="strength-card__desc">{{ s.desc }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="section-label">Témoignages</p>
+      <h2 class="section-title">Ce que disent nos clientes</h2>
+    </div>
+    <div class="testimonials-grid">
+      @for (t of testimonials; track t.name; let i = $index) {
+        <div class="testimonial-card fade-in" [class]="'fade-in-delay-' + (i+1)">
+          <div class="testimonial-stars">
+            @for (s of [1,2,3,4,5]; track s) {
+              <span>⭐</span>
+            }
+          </div>
+          <p class="testimonial-text">"{{ t.text }}"</p>
+          <div class="testimonial-author">
+            <span class="testimonial-avatar">{{ t.avatar }}</span>
+            <div>
+              <strong>{{ t.name }}</strong>
+              <small>{{ t.city }}</small>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT BANNER ── -->
+<section class="contact-banner">
+  <div class="container">
+    <div class="contact-banner__content fade-in">
+      <div class="contact-banner__text">
+        <p class="section-label">Prendre contact</p>
+        <h2 class="section-title light">Réservez votre séance</h2>
+        <p class="contact-banner__sub">Ouvert 24h/24 — 7j/7 · Dakar, Apix, Sénégal</p>
+      </div>
+      <div class="contact-banner__actions">
+        <a href="https://wa.me/221776711897" target="_blank" class="btn-primary accent">
+          📲 WhatsApp
+        </a>
+        <a routerLink="/contact" class="btn-primary light">Nos informations</a>
+      </div>
+    </div>
+  </div>
+</section>

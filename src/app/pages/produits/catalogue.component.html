@@ -1,0 +1,53 @@
+<!-- CATALOGUE PAGE -->
+<div class="catalogue-page" [class]="bgClass">
+
+  <!-- ── PAGE HERO ── -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero__content fade-in">
+        <p class="section-label">{{ emoji }} Glam Beauty by AK</p>
+        <h1 class="page-hero__title">{{ categoryLabel }}</h1>
+        <p class="page-hero__sub">{{ subtitle }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GRID ── -->
+  <section class="catalogue-grid-section">
+    <div class="container">
+      <div class="cat-grid">
+        @for (p of products; track p.id; let i = $index) {
+          <a [routerLink]="['/produit', p.id]" class="cat-card fade-in" [class]="'fade-in-delay-' + ((i % 4) + 1)">
+            <div class="cat-card__img-wrap">
+              <img [src]="p.image" [alt]="p.name" loading="lazy" class="cat-card__img" />
+              @if (p.badge) {
+                <span class="cat-card__badge">{{ p.badge }}</span>
+              }
+              <div class="cat-card__overlay">
+                <span class="cat-card__cta">Voir le détail →</span>
+              </div>
+            </div>
+            <div class="cat-card__info">
+              <h3 class="cat-card__name">{{ p.name }}</h3>
+              <p class="cat-card__desc">{{ p.shortDesc }}</p>
+              <span class="cat-card__link">Voir détail</span>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA WhatsApp ── -->
+  <section class="cat-cta-section">
+    <div class="container">
+      <div class="cat-cta fade-in">
+        <h2 class="cat-cta__title">Une question ? Un rendez-vous ?</h2>
+        <p class="cat-cta__sub">Contactez-nous sur WhatsApp, disponibles 24h/24 — 7j/7</p>
+        <a href="https://wa.me/221776711897" target="_blank" class="btn-primary accent">
+          📲 +221 77 671 18 97
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
