@@ -5,6 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production --base-href=/",
+    "postbuild": "cp dist/ak-fashon-site/browser/index.html dist/ak-fashon-site/browser/404.html && echo 'glambeautybyak.duckdns.org' > dist/ak-fashon-site/browser/CNAME",
+    "deploy": "npm run build:prod && npx angular-cli-ghpages --dir=dist/ak-fashon-site/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -27,6 +30,7 @@
     "@angular/cli": "^18.2.14",
     "@angular/compiler-cli": "^18.2.0",
     "@types/jasmine": "~5.1.0",
+    "angular-cli-ghpages": "^3.1.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
